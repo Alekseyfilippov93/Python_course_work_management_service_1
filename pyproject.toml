@@ -8,6 +8,7 @@ packages = [{include = "course_project", from = "src"}]
 
 [tool.poetry.dependencies]
 python = "^3.13"
+django = "^6.0.2"
 
 
 [tool.poetry.group.dev.dependencies]
