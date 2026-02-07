@@ -1,0 +1,15 @@
+[tool.poetry]
+name = "course-project"
+version = "0.1.0"
+description = "Курсовая работа по Python Сервис управления рассылками"
+authors = ["Алексей <alekseyfilippov9392@gmail.com>"]
+readme = "README.md"
+packages = [{include = "course_project", from = "src"}]
+
+[tool.poetry.dependencies]
+python = "^3.13"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
