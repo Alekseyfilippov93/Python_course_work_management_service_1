@@ -4,7 +4,7 @@ version = "0.1.0"
 description = "Курсовая работа по Python Сервис управления рассылками"
 authors = ["Алексей <alekseyfilippov9392@gmail.com>"]
 readme = "README.md"
-packages = [{include = "course_project", from = "src"}]
+packages = [{ include = "course_project", from = "src" }]
 
 [tool.poetry.dependencies]
 python = "^3.13"
@@ -29,9 +29,7 @@ target-version = ['py310']
 profile = "black"
 line_length = 88
 
-[tool.flake8]
-max-line-length = 120
-extend-ignore = ["E203", "W503"]
+
 
 [tool.mypy]
 python_version = "3.10"

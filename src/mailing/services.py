@@ -30,14 +30,14 @@ def run_mailing(mailing: Mailing):
             MailingAttempt.objects.create(
                 mailing=mailing,
                 status=MailingAttempt.STATUS_SUCCESS,
-                server_response="Отправлено успешно"
+                server_response="Отправлено успешно",
             )
         except Exception as e:
             # Ошибка отправки
             MailingAttempt.objects.create(
                 mailing=mailing,
                 status=MailingAttempt.STATUS_FAILED,
-                server_response=str(e)
+                server_response=str(e),
             )
 
     # Обновляем статус рассылки после отправки
