@@ -58,6 +58,7 @@ class Mailing(models.Model):
         on_delete=models.CASCADE,
         related_name='mailings'
     )
+    is_active = models.BooleanField(default=True, verbose_name="Активна")
 
     def clean(self):
         # Валидация дат
