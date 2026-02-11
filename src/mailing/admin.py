@@ -1,6 +1,6 @@
 from django.contrib import admin, messages
-from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.models import User
+from django.contrib.auth.admin import UserAdmin
 from .services import run_mailing
 from mailing.models import Recipient, Message, Mailing, MailingAttempt
 
@@ -11,6 +11,10 @@ def block_users(modeladmin, request, queryset):
     queryset.update(is_active=False)
 
 
+# Сначала снимаем регистрацию User
+admin.site.unregister(User)
+
+
 # Кастомный UserAdmin с поддержкой блокировки
 @admin.register(User)
 class CustomUserAdmin(UserAdmin):
@@ -18,16 +22,13 @@ class CustomUserAdmin(UserAdmin):
 
     def get_queryset(self, request):
         qs = super().get_queryset(request)
-
         # Суперпользователь видит всех
         if request.user.is_superuser:
             return qs
-
-        # Менеджер видит всех пользователей
+        # Менеджер видит всех
         if request.user.groups.filter(name="Manager").exists():
             return qs
-
-        # Обычные пользователи видят только себя
+        # Обычный пользователь видит только себя
         return qs.filter(id=request.user.id)
 
 

@@ -8,10 +8,7 @@ class Recipient(models.Model):
     email = models.EmailField(unique=True, verbose_name="Email")
     full_name = models.CharField(max_length=255, verbose_name="ФИО")
     comment = models.TextField(blank=True, verbose_name="Комментарий")
-    owner = models.ForeignKey(
-        User,
-        on_delete=models.CASCADE,
-        related_name='recipients')
+    owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name="recipients")
 
     def __str__(self):
         return self.full_name
@@ -20,11 +17,7 @@ class Recipient(models.Model):
 class Message(models.Model):
     subject = models.CharField(max_length=255, verbose_name="Тема письма")
     body = models.TextField(verbose_name="Тело письма")
-    owner = models.ForeignKey(
-        User,
-        on_delete=models.CASCADE,
-        related_name='messages'
-    )
+    owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name="messages")
 
     def __str__(self):
         return self.subject
@@ -53,11 +46,7 @@ class Mailing(models.Model):
         Message, on_delete=models.CASCADE, verbose_name="Сообщение"
     )
     recipients = models.ManyToManyField(Recipient, verbose_name="Получатели")
-    owner = models.ForeignKey(
-        User,
-        on_delete=models.CASCADE,
-        related_name='mailings'
-    )
+    owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name="mailings")
     is_active = models.BooleanField(default=True, verbose_name="Активна")
 
     def clean(self):

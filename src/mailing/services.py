@@ -6,8 +6,12 @@ from .models import Mailing, MailingAttempt
 
 def run_mailing(mailing: Mailing):
     """
-    Отправка сообщений по требованию для конкретной рассылки.
+    Отправка сообщений для конкретной рассылки.
     """
+    # Проверка, активна ли рассылка
+    if not mailing.is_active:
+        return "Рассылка отключена"
+
     now = timezone.now()
 
     # Проверка временного окна

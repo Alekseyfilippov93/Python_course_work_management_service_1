@@ -1,8 +1,10 @@
 from django.contrib.auth.decorators import login_required
 from django.utils import timezone
 from django.shortcuts import render
+from django.views.decorators.cache import cache_page
 from .models import Mailing, Recipient, MailingAttempt
 
+@cache_page(60)
 @login_required
 def home(request):
     now = timezone.now()
@@ -12,27 +14,17 @@ def home(request):
     total_mailings = user_mailings.count()
 
     active_mailings = user_mailings.filter(
-        start_time__lte=now,
-        end_time__gte=now,
-        status=Mailing.STATUS_STARTED
+        start_time__lte=now, end_time__gte=now, status=Mailing.STATUS_STARTED
     ).count()
 
-    unique_recipients = Recipient.objects.filter(
-        owner=request.user
-    ).count()
+    unique_recipients = Recipient.objects.filter(owner=request.user).count()
 
     # --- СТАТИСТИКА ПО ПОПЫТКАМ ---
-    attempts = MailingAttempt.objects.filter(
-        mailing__owner=request.user
-    )
+    attempts = MailingAttempt.objects.filter(mailing__owner=request.user)
 
-    success_attempts = attempts.filter(
-        status=MailingAttempt.STATUS_SUCCESS
-    ).count()
+    success_attempts = attempts.filter(status=MailingAttempt.STATUS_SUCCESS).count()
 
-    failed_attempts = attempts.filter(
-        status=MailingAttempt.STATUS_FAILED
-    ).count()
+    failed_attempts = attempts.filter(status=MailingAttempt.STATUS_FAILED).count()
 
     total_attempts = attempts.count()
 
