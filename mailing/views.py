@@ -1,8 +1,10 @@
 from django.contrib.auth.decorators import login_required
-from django.utils import timezone
 from django.shortcuts import render
+from django.utils import timezone
 from django.views.decorators.cache import cache_page
-from .models import Mailing, Recipient, MailingAttempt
+
+from .models import Mailing, MailingAttempt, Recipient
+
 
 @cache_page(60)
 @login_required

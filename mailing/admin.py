@@ -1,8 +1,10 @@
 from django.contrib import admin, messages
-from django.contrib.auth.models import User
 from django.contrib.auth.admin import UserAdmin
+from django.contrib.auth.models import User
+
+from mailing.models import Mailing, MailingAttempt, Message, Recipient
+
 from .services import run_mailing
-from mailing.models import Recipient, Message, Mailing, MailingAttempt
 
 
 # Действие для блокировки выбранных пользователей
