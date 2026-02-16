@@ -9,4 +9,8 @@ class RegisterView(CreateView):
     model = User
     form_class = RegisterForm
     template_name = "users/register.html"
-    success_url = reverse_lazy("login")
+
+    def form_valid(self, form):
+        user = form.save()
+        login(self.request, user)  # автоматический вход
+        return redirect("home")
