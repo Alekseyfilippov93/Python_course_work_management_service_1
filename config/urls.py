@@ -23,5 +23,5 @@ urlpatterns = [
     path("", include("mailing.urls")),
     path("accounts/", include("django.contrib.auth.urls")),
     path("users/", include("users.urls")),
-    path("mailings/", include("mailings.urls")),
+    path("mailings/", include("mailing.urls")),
 ]
