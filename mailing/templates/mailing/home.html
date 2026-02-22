@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1>Сервис управления рассылками</h1>
+
+<!-- Основная статистика -->
+<ul>
+    <li>Общее количество рассылок: <strong>{{ total_mailings }}</strong></li>
+    <li>Активные рассылки: <strong>{{ active_mailings }}</strong></li>
+    <li>Уникальные получатели: <strong>{{ unique_recipients }}</strong></li>
+</ul>
+
+<!-- Статистика по попыткам -->
+<h3>Статистика рассылок</h3>
+<ul>
+    <li>Всего попыток: <strong>{{ total_attempts }}</strong></li>
+    <li>Успешных: <strong>{{ success_attempts }}</strong></li>
+    <li>Не успешных: <strong>{{ failed_attempts }}</strong></li>
+</ul>
+
+{% endblock %}
